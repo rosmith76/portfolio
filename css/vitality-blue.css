@@ -98,6 +98,9 @@ body {
   font-size: 16px;
   font-weight: 300;
 }
+.skills-icons {
+  font-size: 75px;
+}
 a {
   color: #0A8FD5;
   -webkit-transition: all 0.5s;
