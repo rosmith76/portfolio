@@ -347,7 +347,7 @@ jQuery.extend( {
 
 	// Convert dashed to camelCase; used by the css and data modules
 	// Support: IE9-11+
-	// Microsoft forgot to hump their vendor prefix (#9572)
+	// Microsoft forgot to hump their statics prefix (#9572)
 	camelCase: function( string ) {
 		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
 	},
@@ -5706,7 +5706,7 @@ var documentElement = document.documentElement;
 		div.style.cssText =
 
 			// Support: Firefox<29, Android 2.3
-			// Vendor-prefix box-sizing
+			// statics-prefix box-sizing
 			"-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;" +
 			"position:relative;display:block;" +
 			"margin:auto;border:1px;padding:1px;" +
@@ -5774,7 +5774,7 @@ var documentElement = document.documentElement;
 			marginDiv.style.cssText = div.style.cssText =
 
 				// Support: Android 2.3
-				// Vendor-prefix box-sizing
+				// statics-prefix box-sizing
 				"-webkit-box-sizing:content-box;box-sizing:content-box;" +
 				"display:block;margin:0;border:0;padding:0";
 			marginDiv.style.marginRight = marginDiv.style.width = "0";
@@ -5878,15 +5878,15 @@ var
 	cssPrefixes = [ "Webkit", "O", "Moz", "ms" ],
 	emptyStyle = document.createElement( "div" ).style;
 
-// Return a css property mapped to a potentially vendor prefixed property
-function vendorPropName( name ) {
+// Return a css property mapped to a potentially statics prefixed property
+function staticsPropName( name ) {
 
-	// Shortcut for names that are not vendor prefixed
+	// Shortcut for names that are not statics prefixed
 	if ( name in emptyStyle ) {
 		return name;
 	}
 
-	// Check for vendor prefixed names
+	// Check for statics prefixed names
 	var capName = name[ 0 ].toUpperCase() + name.slice( 1 ),
 		i = cssPrefixes.length;
 
@@ -6113,7 +6113,7 @@ jQuery.extend( {
 			style = elem.style;
 
 		name = jQuery.cssProps[ origName ] ||
-			( jQuery.cssProps[ origName ] = vendorPropName( origName ) || origName );
+			( jQuery.cssProps[ origName ] = staticsPropName( origName ) || origName );
 
 		// Gets hook for the prefixed version, then unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
@@ -6173,7 +6173,7 @@ jQuery.extend( {
 
 		// Make sure that we're working with the right name
 		name = jQuery.cssProps[ origName ] ||
-			( jQuery.cssProps[ origName ] = vendorPropName( origName ) || origName );
+			( jQuery.cssProps[ origName ] = staticsPropName( origName ) || origName );
 
 		// Try prefixed name followed by the unprefixed name
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];

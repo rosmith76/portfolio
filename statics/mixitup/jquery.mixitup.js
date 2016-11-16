@@ -294,16 +294,16 @@
 
 		_platformDetect: function(){
 			var self = this,
-				vendorsTrans = ['Webkit', 'Moz', 'O', 'ms'],
-				vendorsRAF = ['webkit', 'moz'],
+				staticssTrans = ['Webkit', 'Moz', 'O', 'ms'],
+				staticssRAF = ['webkit', 'moz'],
 				chrome = window.navigator.appVersion.match(/Chrome\/(\d+)\./) || false,
 				ff = typeof InstallTrigger !== 'undefined',
 				prefix = function(el){
-					for (var i = 0; i < vendorsTrans.length; i++){
-						if (vendorsTrans[i] + 'Transition' in el.style){
+					for (var i = 0; i < staticssTrans.length; i++){
+						if (staticssTrans[i] + 'Transition' in el.style){
 							return {
-								prefix: '-'+vendorsTrans[i].toLowerCase()+'-',
-								vendor: vendorsTrans[i]
+								prefix: '-'+staticssTrans[i].toLowerCase()+'-',
+								statics: staticssTrans[i]
 							};
 						};
 					};
@@ -316,7 +316,7 @@
 			self._chrome = chrome ? parseInt(chrome[1], 10) : false;
 			self._ff = ff ? parseInt(window.navigator.userAgent.match(/rv:([^)]+)\)/)[1]) : false;
 			self._prefix = transPrefix.prefix;
-			self._vendor = transPrefix.vendor;
+			self._statics = transPrefix.statics;
 			self._suckMode = window.atob && self._prefix ? false : true;
 
 			self._suckMode && (self.animation.enable = false);
@@ -329,8 +329,8 @@
 			 * window.requestAnimationFrame
 			 */
 
-			for(var x = 0; x < vendorsRAF.length && !window.requestAnimationFrame; x++){
-				window.requestAnimationFrame = window[vendorsRAF[x]+'RequestAnimationFrame'];
+			for(var x = 0; x < staticssRAF.length && !window.requestAnimationFrame; x++){
+				window.requestAnimationFrame = window[staticssRAF[x]+'RequestAnimationFrame'];
 			}
 
 			/**
@@ -1017,7 +1017,7 @@
 		_getOrigMixData: function(){
 			var self = this,
 				parentStyle = !self._suckMode ? window.getComputedStyle(self._$parent[0]) : {boxSizing: ''},
-				parentBS = parentStyle.boxSizing || parentStyle[self._vendor+'BoxSizing'];
+				parentBS = parentStyle.boxSizing || parentStyle[self._statics+'BoxSizing'];
 
 			self._incPadding = (parentBS === 'border-box');
 

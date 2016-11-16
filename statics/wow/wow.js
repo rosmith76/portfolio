@@ -365,41 +365,41 @@
       }
       box.style.visibility = hidden ? 'hidden' : 'visible';
       if (duration) {
-        this.vendorSet(box.style, {
+        this.staticsSet(box.style, {
           animationDuration: duration
         });
       }
       if (delay) {
-        this.vendorSet(box.style, {
+        this.staticsSet(box.style, {
           animationDelay: delay
         });
       }
       if (iteration) {
-        this.vendorSet(box.style, {
+        this.staticsSet(box.style, {
           animationIterationCount: iteration
         });
       }
-      this.vendorSet(box.style, {
+      this.staticsSet(box.style, {
         animationName: hidden ? 'none' : this.cachedAnimationName(box)
       });
       return box;
     };
 
-    WOW.prototype.vendors = ["moz", "webkit"];
+    WOW.prototype.staticss = ["moz", "webkit"];
 
-    WOW.prototype.vendorSet = function(elem, properties) {
-      var name, results, value, vendor;
+    WOW.prototype.staticsSet = function(elem, properties) {
+      var name, results, value, statics;
       results = [];
       for (name in properties) {
         value = properties[name];
         elem["" + name] = value;
         results.push((function() {
           var j, len, ref, results1;
-          ref = this.vendors;
+          ref = this.staticss;
           results1 = [];
           for (j = 0, len = ref.length; j < len; j++) {
-            vendor = ref[j];
-            results1.push(elem["" + vendor + (name.charAt(0).toUpperCase()) + (name.substr(1))] = value);
+            statics = ref[j];
+            results1.push(elem["" + statics + (name.charAt(0).toUpperCase()) + (name.substr(1))] = value);
           }
           return results1;
         }).call(this));
@@ -407,14 +407,14 @@
       return results;
     };
 
-    WOW.prototype.vendorCSS = function(elem, property) {
-      var j, len, ref, result, style, vendor;
+    WOW.prototype.staticsCSS = function(elem, property) {
+      var j, len, ref, result, style, statics;
       style = getComputedStyle(elem);
       result = style.getPropertyCSSValue(property);
-      ref = this.vendors;
+      ref = this.staticss;
       for (j = 0, len = ref.length; j < len; j++) {
-        vendor = ref[j];
-        result = result || style.getPropertyCSSValue("-" + vendor + "-" + property);
+        statics = ref[j];
+        result = result || style.getPropertyCSSValue("-" + statics + "-" + property);
       }
       return result;
     };
@@ -422,7 +422,7 @@
     WOW.prototype.animationName = function(box) {
       var animationName;
       try {
-        animationName = this.vendorCSS(box, 'animation-name').cssText;
+        animationName = this.staticsCSS(box, 'animation-name').cssText;
       } catch (_error) {
         animationName = getComputedStyle(box).getPropertyValue('animation-name');
       }
